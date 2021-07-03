@@ -1,6 +1,8 @@
+import { useState } from "react";
+import axios from "axios";
 import Form from "./Form";
 import Table from "./Table";
-import { useState } from "react";
+import Header from "./Header";
 
 const App = () => {
   const [handleQuery, setHandleQuery] = useState("");
@@ -45,6 +47,7 @@ const App = () => {
 
   return (
     <div>
+      <Header />
       <Form
         handleQuery={handleQuery}
         setHandleQuery={setHandleQuery}

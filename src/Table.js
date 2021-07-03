@@ -2,7 +2,7 @@ import TableAPI from "./TableAPI.js";
 
 const Table = ({ characterData }) => {
   return (
-    <table>
+    <table className="bg-dark bg-gradient">
       <thead>
         <tr>
           <td>Name</td>

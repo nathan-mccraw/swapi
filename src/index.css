@@ -1,6 +1,32 @@
+@font-face {
+  font-family: starjedi;
+  src: url(./font/starjedi/Starjedi.ttf);
+}
+
+@font-face {
+  font-family: starjhol;
+  src: url(./font/starjedi/Starjhol.ttf);
+}
+
 body {
   background-image: url(/src/photos/Swapi_Background_Image.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+h1 {
+  font-family: "starjhol";
+  color: yellow;
+  background-color: black;
+  border-color: yellow;
+}
+
+table {
+  font-family: starjedi;
+  color: rgb(201, 201, 3);
+}
+
+thead {
+  font-size: x-large;
 }

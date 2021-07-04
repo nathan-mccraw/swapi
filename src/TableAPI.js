@@ -7,8 +7,8 @@ const TableAPI = ({ characterData }) => {
           <td>{characters.birth_year}</td>
           <td>{characters.height}</td>
           <td>{characters.mass}</td>
-          <td>{characters.homeworld}</td>
-          <td>{characters.species}</td>
+          <td>{characters.homeworldName}</td>
+          <td>{characters.speciesName}</td>
         </tr>
       ))}
     </tbody>

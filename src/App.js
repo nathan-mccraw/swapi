@@ -5,39 +5,60 @@ import Table from "./Table";
 import Header from "./Header";
 
 const App = () => {
-  const fetchCharacters = async (query) => {
-    try {
-      const res = await axios.get(
-        `https://swapi.dev/api/people/?search=${query}`
-      );
-      setCharacterData(res.data.results);
-      fetchWorld(res.data.results);
-      // fetchSpecies(res.data.results);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const [characterWorldsArray, setCharacterWorldsArray] = useState([]);
-  const fetchWorld = async (dataArray) => {
-    try {
-      let worldsArray = dataArray.map((character) => {
-        return axios.get(character.world);
-      });
-      setCharacterWorldsArray(worldsArray);
-      console.log(worldsArray);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const [handleQuery, setHandleQuery] = useState("");
+  const [characterData, setCharacterData] = useState([]);
+
+  const fetchCharacterData = (query) => {
+    try {
+      axios
+        .get(`https://swapi.dev/api/people/?search=${query}`)
+        .then(async ({ data }) => {
+          let resultsArray = data.results;
+          const worldNameArray = await fetchWorld(resultsArray);
+          const speciesNameArray = await fetchSpecies(resultsArray);
+          let index = 0;
+          resultsArray.forEach((character) => {
+            character.homeworldName = worldNameArray[index];
+            character.speciesName = speciesNameArray[index];
+            index++;
+          });
+          setCharacterData(resultsArray);
+          return data;
+        })
+        .then((data) => {
+          console.log(data.next);
+          console.log(data.previous);
+          // setNextPage(data.next);
+          // setPreviousPage(data.previous);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchWorld = async (resultsArray) => {
+    const worldsPromiseArray = resultsArray.map(({ homeworld }) =>
+      axios.get(homeworld)
+    );
+    const worldDataArray = await Promise.all(worldsPromiseArray);
+    const worldNameArray = worldDataArray.map(({ data }) => data.name);
+    return worldNameArray;
+  };
+
+  const fetchSpecies = async (dataArray) => {
+    const speciesPromiseArray = dataArray.map(({ species }) =>
+      axios.get(species)
+    );
+    const speciesDataArray = await Promise.all(speciesPromiseArray);
+    const speciesNameArray = speciesDataArray.map(({ data }) => data.name);
+    return speciesNameArray;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchCharacters(handleQuery);
+    fetchCharacterData(handleQuery);
     setHandleQuery("");
   };
-  const [characterData, setCharacterData] = useState([]);
 
   return (
     <div className="container">
@@ -47,10 +68,9 @@ const App = () => {
         setHandleQuery={setHandleQuery}
         handleSubmit={handleSubmit}
       />
-      <Table
-        characterData={characterData}
-        characterWorlds={characterWorldsArray}
-      />
+      <button>Previous Page</button>
+      <Table characterData={characterData} />
+      <button>Next Page</button>
     </div>
   );
 };

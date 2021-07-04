@@ -7,30 +7,27 @@ import Header from "./Header";
 const App = () => {
   const [handleQuery, setHandleQuery] = useState("");
   const [characterData, setCharacterData] = useState([]);
+  const [nextPage, setNextPage] = useState(
+    "https://swapi.dev/api/people/?search=&page=2"
+  );
+  const [previousPage, setPreviousPage] = useState(null);
 
-  const fetchCharacterData = (query) => {
+  const fetchCharacterData = (queryURL) => {
     try {
-      axios
-        .get(`https://swapi.dev/api/people/?search=${query}`)
-        .then(async ({ data }) => {
-          let resultsArray = data.results;
-          const worldNameArray = await fetchWorld(resultsArray);
-          const speciesNameArray = await fetchSpecies(resultsArray);
-          let index = 0;
-          resultsArray.forEach((character) => {
-            character.homeworldName = worldNameArray[index];
-            character.speciesName = speciesNameArray[index];
-            index++;
-          });
-          setCharacterData(resultsArray);
-          return data;
-        })
-        .then((data) => {
-          console.log(data.next);
-          console.log(data.previous);
-          // setNextPage(data.next);
-          // setPreviousPage(data.previous);
+      axios.get(`${queryURL}`).then(async ({ data }) => {
+        let resultsArray = data.results;
+        const worldNameArray = await fetchWorld(resultsArray);
+        const speciesNameArray = await fetchSpecies(resultsArray);
+        let index = 0;
+        resultsArray.forEach((character) => {
+          character.homeworldName = worldNameArray[index];
+          character.speciesName = speciesNameArray[index];
+          index++;
         });
+        setCharacterData(resultsArray);
+        setNextPage(data.next);
+        setPreviousPage(data.previous);
+      });
     } catch (error) {
       console.log(error);
     }
@@ -54,10 +51,13 @@ const App = () => {
     return speciesNameArray;
   };
 
+  const handleNextPage = (e) => {
+    fetchCharacterData(`${nextPage}`);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchCharacterData(handleQuery);
-    setHandleQuery("");
+    fetchCharacterData(`https://swapi.dev/api/people/?search=${handleQuery}`);
   };
 
   return (
@@ -68,9 +68,11 @@ const App = () => {
         setHandleQuery={setHandleQuery}
         handleSubmit={handleSubmit}
       />
-      <button>Previous Page</button>
+      <button className="btn">Previous Page</button>
       <Table characterData={characterData} />
-      <button>Next Page</button>
+      <button onClick={handleNextPage} className="btn">
+        Next Page
+      </button>
     </div>
   );
 };

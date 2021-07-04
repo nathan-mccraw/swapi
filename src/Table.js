@@ -2,15 +2,19 @@ import TableAPI from "./TableAPI.js";
 
 const Table = ({ characterData }) => {
   return (
-    <table className="bg-dark bg-gradient">
+    <table className="table table-dark table-sm .table-bordered">
       <thead>
         <tr>
-          <td>Name</td>
-          <td>Birth Date</td>
-          <td>Height</td>
-          <td>Mass</td>
-          <td>Home World</td>
-          <td>Species</td>
+          <th className="col">Name</th>
+          <th className="col">
+            Birth
+            <br />
+            Date
+          </th>
+          <th className="col">Height</th>
+          <th className="col">Mass</th>
+          <th className="col">Home World</th>
+          <th className="col">Species</th>
         </tr>
       </thead>
       <TableAPI characterData={characterData} />

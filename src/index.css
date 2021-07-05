@@ -9,16 +9,18 @@
 }
 
 body {
-  background-image: url(/src/photos/Swapi_Background_Image.jpg);
+  background-image: url(/src/photos/swapi_background_image2.jpg);
   background-size: cover;
-  background-position: center;
+  background-position: top;
   background-repeat: no-repeat;
 }
 
 h1 {
   font-family: "starjhol";
   color: yellow;
-  background-color: black;
+  background-image: url(/src/photos/swapi_header_background_image.jpg);
+  background-size: cover;
+  background-position: top;
   border-color: yellow;
 }
 
@@ -29,4 +31,23 @@ table {
 
 thead {
   font-size: x-large;
+}
+
+.opacity-0 {
+  opacity: 0 !important;
+}
+.opacity-1 {
+  opacity: 0.2 !important;
+}
+.opacity-2 {
+  opacity: 0.4 !important;
+}
+.opacity-3 {
+  opacity: 0.6 !important;
+}
+.opacity-4 {
+  opacity: 0.8 !important;
+}
+.opacity-5 {
+  opacity: 1 !important;
 }

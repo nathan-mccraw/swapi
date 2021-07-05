@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Form from "./Form";
 import Table from "./Table";
 import Header from "./Header";
+import Buttons from "./Buttons";
 
 const App = () => {
   const [handleQuery, setHandleQuery] = useState("");
   const [characterData, setCharacterData] = useState([]);
-  const [nextPage, setNextPage] = useState(
-    "https://swapi.dev/api/people/?search=&page=2"
-  );
+  const [nextPage, setNextPage] = useState("");
   const [previousPage, setPreviousPage] = useState(null);
+
+  useEffect(() => {
+    fetchCharacterData("https://swapi.dev/api/people/");
+  }, []);
 
   const fetchCharacterData = (queryURL) => {
     try {
@@ -51,14 +54,13 @@ const App = () => {
     return speciesNameArray;
   };
 
-  const handleNextPage = (e) => {
-    fetchCharacterData(`${nextPage}`);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     fetchCharacterData(`https://swapi.dev/api/people/?search=${handleQuery}`);
   };
+
+  const handleNext = () => fetchCharacterData(`${nextPage}`);
+  const handlePrevious = () => fetchCharacterData(`${previousPage}`);
 
   return (
     <div className="container">
@@ -68,11 +70,8 @@ const App = () => {
         setHandleQuery={setHandleQuery}
         handleSubmit={handleSubmit}
       />
-      <button className="btn">Previous Page</button>
+      <Buttons handleNext={handleNext} handlePrevious={handlePrevious} />
       <Table characterData={characterData} />
-      <button onClick={handleNextPage} className="btn">
-        Next Page
-      </button>
     </div>
   );
 };

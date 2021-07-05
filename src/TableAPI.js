@@ -1,17 +1,29 @@
 const TableAPI = ({ characterData }) => {
-  return (
-    <tbody>
-      {characterData.map((characters) => (
+  if (characterData.length > 0)
+    return (
+      <tbody>
+        {characterData.map((characters) => (
+          <tr>
+            <td>{characters.name.toLowerCase()}</td>
+            <td>{characters.birth_year}</td>
+            <td>{characters.height}</td>
+            <td>{characters.mass}</td>
+            <td>{characters.homeworldName}</td>
+            <td>{characters.speciesName}</td>
+          </tr>
+        ))}
+      </tbody>
+    );
+  else {
+    return (
+      <tbody>
         <tr>
-          <td>{characters.name}</td>
-          <td>{characters.birth_year}</td>
-          <td>{characters.height}</td>
-          <td>{characters.mass}</td>
-          <td>{characters.homeworldName}</td>
-          <td>{characters.speciesName}</td>
+          <td colspan="6" rowspan="10" align="center">
+            No returns, did this search yield
+          </td>
         </tr>
-      ))}
-    </tbody>
-  );
+      </tbody>
+    );
+  }
 };
 export default TableAPI;

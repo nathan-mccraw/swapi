@@ -1,15 +1,15 @@
 const Form = ({ handleQuery, setHandleQuery, handleSubmit }) => {
   return (
-    <div className="col-4">
+    <div className="container col-4">
       <form onSubmit={handleSubmit}>
-        <div className="input-group">
+        <div className="input-group justify-content-center">
           <input
             className="form-control"
             type="text"
             onChange={(e) => setHandleQuery(e.target.value)}
             value={handleQuery}
           />
-          <button className="btn btn-outline-secondary" id="button-addon2">
+          <button className="btn btn-outline-light" id="button-addon2">
             Search
           </button>
         </div>

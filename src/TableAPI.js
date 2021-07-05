@@ -18,7 +18,7 @@ const TableAPI = ({ characterData }) => {
     return (
       <tbody>
         <tr>
-          <td colspan="6" rowspan="10" align="center">
+          <td colspan="6" align="center">
             No returns, did this search yield
           </td>
         </tr>

@@ -1,4 +1,6 @@
-const Header = () => {
+import AboutModal from "./AboutModal";
+
+const Header = ({ isAboutModalOpen, showAboutModal, hideAboutModal }) => {
   return (
     <header className="container mb-4">
       <div className="row justify-content-center">
@@ -8,6 +10,13 @@ const Header = () => {
             APi App
           </h1>
         </div>
+      </div>
+      <div className="fixed-top">
+        <AboutModal
+          isAboutModalOpen={isAboutModalOpen}
+          showAboutModal={showAboutModal}
+          hideAboutModal={hideAboutModal}
+        />
       </div>
     </header>
   );

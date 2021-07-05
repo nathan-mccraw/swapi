@@ -29,6 +29,17 @@ table {
   color: rgb(201, 201, 3);
 }
 
+.modal-content {
+  background-image: url(/src/photos/swapi_header_background_image.jpg);
+  background-size: cover;
+  background-position: top;
+  color: white;
+}
+
+td:hover {
+  cursor: pointer;
+}
+
 thead {
   font-size: x-large;
 }

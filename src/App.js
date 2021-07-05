@@ -7,9 +7,10 @@ import Buttons from "./Buttons";
 
 const App = () => {
   const [handleQuery, setHandleQuery] = useState("");
+  const [isAboutModalOpen, setisAboutModalOpen] = useState(false);
   const [characterData, setCharacterData] = useState([]);
   const [nextPage, setNextPage] = useState("");
-  const [previousPage, setPreviousPage] = useState(null);
+  const [previousPage, setPreviousPage] = useState("");
 
   useEffect(() => {
     fetchCharacterData("https://swapi.dev/api/people/");
@@ -45,8 +46,8 @@ const App = () => {
     return worldNameArray;
   };
 
-  const fetchSpecies = async (dataArray) => {
-    const speciesPromiseArray = dataArray.map(({ species }) =>
+  const fetchSpecies = async (resultsArray) => {
+    const speciesPromiseArray = resultsArray.map(({ species }) =>
       axios.get(species)
     );
     const speciesDataArray = await Promise.all(speciesPromiseArray);
@@ -61,16 +62,29 @@ const App = () => {
 
   const handleNext = () => fetchCharacterData(`${nextPage}`);
   const handlePrevious = () => fetchCharacterData(`${previousPage}`);
+  const showAboutModal = () => setisAboutModalOpen(true);
+  const hideAboutModal = () => setisAboutModalOpen(false);
+
+  console.log(characterData);
 
   return (
     <div className="container">
-      <Header />
+      <Header
+        isAboutModalOpen={isAboutModalOpen}
+        showAboutModal={showAboutModal}
+        hideAboutModal={hideAboutModal}
+      />
       <Form
         handleQuery={handleQuery}
         setHandleQuery={setHandleQuery}
         handleSubmit={handleSubmit}
       />
-      <Buttons handleNext={handleNext} handlePrevious={handlePrevious} />
+      <Buttons
+        handleNext={handleNext}
+        handlePrevious={handlePrevious}
+        nextPage={nextPage}
+        previousPage={previousPage}
+      />
       <Table characterData={characterData} />
     </div>
   );

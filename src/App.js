@@ -20,13 +20,13 @@ const App = () => {
   const fetchCharacterData = (queryURL) => {
     try {
       axios.get(`${queryURL}`).then(({ data }) => {
-        let resultsArray = data.results;
+        const resultsArray = data.results;
 
         resultsArray.forEach(async (character) => {
           character.homeworld = await fetchWorld(character);
           character.species = await fetchSpecies(character);
         });
-        console.log(resultsArray);
+
         setCharacterData(resultsArray);
         setNextPage(data.next);
         setPreviousPage(data.previous);
@@ -43,8 +43,8 @@ const App = () => {
 
   const fetchSpecies = async (character) => {
     const species = await axios.get(character.species);
-    if (!species.data.name) return "human";
-    else return species.data.name;
+    // if (!species.data.name) return "human";
+    return species.data.name;
   };
 
   const handleSubmit = (e) => {

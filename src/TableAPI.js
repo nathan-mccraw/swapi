@@ -1,4 +1,6 @@
 const TableAPI = ({ characterData }) => {
+  console.log("in tableAPI:");
+  console.log(characterData);
   if (characterData.length > 0)
     return (
       <tbody>
@@ -8,7 +10,7 @@ const TableAPI = ({ characterData }) => {
             <td>{characters.birth_year}</td>
             <td>{characters.height}</td>
             <td>{characters.mass}</td>
-            <td>{characters.homeworldName}</td>
+            <td>{characters.homeworld}</td>
             <td>{characters.speciesName}</td>
           </tr>
         ))}

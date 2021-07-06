@@ -18,16 +18,14 @@ const App = () => {
 
   const fetchCharacterData = (queryURL) => {
     try {
-      axios.get(`${queryURL}`).then(async ({ data }) => {
+      axios.get(`${queryURL}`).then(({ data }) => {
         let resultsArray = data.results;
-        const worldNameArray = await fetchWorld(resultsArray);
-        const speciesNameArray = await fetchSpecies(resultsArray);
-        let index = 0;
-        resultsArray.forEach((character) => {
-          character.homeworldName = worldNameArray[index];
-          character.speciesName = speciesNameArray[index];
-          index++;
+
+        resultsArray.forEach(async (character) => {
+          character.homeworld = await fetchWorld(character);
+          setCharacterData(character.homeworld);
         });
+
         setCharacterData(resultsArray);
         setNextPage(data.next);
         setPreviousPage(data.previous);
@@ -37,23 +35,20 @@ const App = () => {
     }
   };
 
-  const fetchWorld = async (resultsArray) => {
-    const worldsPromiseArray = resultsArray.map(({ homeworld }) =>
-      axios.get(homeworld)
-    );
-    const worldDataArray = await Promise.all(worldsPromiseArray);
-    const worldNameArray = worldDataArray.map(({ data }) => data.name);
-    return worldNameArray;
+  const fetchWorld = async (character) => {
+    const homeworld = await axios.get(character.homeworld);
+    return homeworld.data.name;
   };
+  // const fetchSpecies = async (character) => await axios.get(character.species);
 
-  const fetchSpecies = async (resultsArray) => {
-    const speciesPromiseArray = resultsArray.map(({ species }) =>
-      axios.get(species)
-    );
-    const speciesDataArray = await Promise.all(speciesPromiseArray);
-    const speciesNameArray = speciesDataArray.map(({ data }) => data.name);
-    return speciesNameArray;
-  };
+  // const fetchSpecies = async (resultsArray) => {
+  //   const speciesPromiseArray = resultsArray.map(({ species }) =>
+  //     axios.get(species)
+  //   );
+  //   const speciesDataArray = await Promise.all(speciesPromiseArray);
+  //   const speciesNameArray = speciesDataArray.map(({ data }) => data.name);
+  //   return speciesNameArray;
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,6 +60,7 @@ const App = () => {
   const showAboutModal = () => setisAboutModalOpen(true);
   const hideAboutModal = () => setisAboutModalOpen(false);
 
+  console.log("right before return");
   console.log(characterData);
 
   return (

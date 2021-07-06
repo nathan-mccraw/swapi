@@ -1,17 +1,17 @@
+import { useEffect } from "react";
+
 const TableAPI = ({ characterData }) => {
-  console.log("in tableAPI:");
-  console.log(characterData);
   if (characterData.length > 0)
     return (
       <tbody>
-        {characterData.map((characters) => (
+        {characterData.map((character) => (
           <tr>
-            <td>{characters.name.toLowerCase()}</td>
-            <td>{characters.birth_year}</td>
-            <td>{characters.height}</td>
-            <td>{characters.mass}</td>
-            <td>{characters.homeworld}</td>
-            <td>{characters.speciesName}</td>
+            <td key={character.name}>{character.name.toLowerCase()}</td>
+            <td key={characterData.birth_year}>{character.birth_year}</td>
+            <td key={characterData.height}>{character.height}</td>
+            <td key={characterData.mass}>{character.mass}</td>
+            <td key={characterData.homeworld}>{character.homeworld}</td>
+            <td key={characterData.species}>{character.species}</td>
           </tr>
         ))}
       </tbody>
@@ -20,7 +20,7 @@ const TableAPI = ({ characterData }) => {
     return (
       <tbody>
         <tr>
-          <td colspan="6" align="center">
+          <td colSpan="6" align="center">
             No returns, did this search yield
           </td>
         </tr>

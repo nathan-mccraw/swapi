@@ -6,6 +6,7 @@ import Header from "./Header";
 import Buttons from "./Buttons";
 
 const App = () => {
+  const swapiURL = "https://swapi.dev/api/people/";
   const [handleQuery, setHandleQuery] = useState("");
   const [isAboutModalOpen, setisAboutModalOpen] = useState(false);
   const [characterData, setCharacterData] = useState([]);
@@ -13,7 +14,7 @@ const App = () => {
   const [previousPage, setPreviousPage] = useState("");
 
   useEffect(() => {
-    fetchCharacterData("https://swapi.dev/api/people/");
+    fetchCharacterData(swapiURL);
   }, []);
 
   const fetchCharacterData = (queryURL) => {
@@ -23,9 +24,9 @@ const App = () => {
 
         resultsArray.forEach(async (character) => {
           character.homeworld = await fetchWorld(character);
-          setCharacterData(character.homeworld);
+          character.species = await fetchSpecies(character);
         });
-
+        console.log(resultsArray);
         setCharacterData(resultsArray);
         setNextPage(data.next);
         setPreviousPage(data.previous);
@@ -39,16 +40,12 @@ const App = () => {
     const homeworld = await axios.get(character.homeworld);
     return homeworld.data.name;
   };
-  // const fetchSpecies = async (character) => await axios.get(character.species);
 
-  // const fetchSpecies = async (resultsArray) => {
-  //   const speciesPromiseArray = resultsArray.map(({ species }) =>
-  //     axios.get(species)
-  //   );
-  //   const speciesDataArray = await Promise.all(speciesPromiseArray);
-  //   const speciesNameArray = speciesDataArray.map(({ data }) => data.name);
-  //   return speciesNameArray;
-  // };
+  const fetchSpecies = async (character) => {
+    const species = await axios.get(character.species);
+    if (!species.data.name) return "human";
+    else return species.data.name;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -59,9 +56,6 @@ const App = () => {
   const handlePrevious = () => fetchCharacterData(`${previousPage}`);
   const showAboutModal = () => setisAboutModalOpen(true);
   const hideAboutModal = () => setisAboutModalOpen(false);
-
-  console.log("right before return");
-  console.log(characterData);
 
   return (
     <div className="container">

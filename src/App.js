@@ -19,15 +19,20 @@ const App = () => {
 
   const fetchCharacterData = (queryURL) => {
     try {
-      axios.get(`${queryURL}`).then(({ data }) => {
+      axios.get(`${queryURL}`).then(async ({ data }) => {
         const resultsArray = data.results;
 
-        resultsArray.forEach(async (character) => {
-          character.homeworld = await fetchWorld(character);
-          character.species = await fetchSpecies(character);
-        });
+        const result = Promise.all(
+          resultsArray.map(async (character) => {
+            character.homeworld = await fetchWorld(character);
+            character.species = await fetchSpecies(character);
+            return character;
+          })
+        );
 
-        setCharacterData(resultsArray);
+        const characters = await result;
+
+        setCharacterData(characters);
         setNextPage(data.next);
         setPreviousPage(data.previous);
       });
@@ -43,8 +48,8 @@ const App = () => {
 
   const fetchSpecies = async (character) => {
     const species = await axios.get(character.species);
-    // if (!species.data.name) return "human";
-    return species.data.name;
+    if (!species.data.name) return "human";
+    else return species.data.name;
   };
 
   const handleSubmit = (e) => {

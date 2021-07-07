@@ -1,17 +1,17 @@
-import { useEffect } from "react";
+import uuid from "react-uuid";
 
 const TableAPI = ({ characterData }) => {
   if (characterData.length > 0)
     return (
       <tbody>
         {characterData.map((character) => (
-          <tr>
+          <tr key={uuid()}>
             <td key={character.name}>{character.name.toLowerCase()}</td>
-            <td key={characterData.birth_year}>{character.birth_year}</td>
-            <td key={characterData.height}>{character.height}</td>
-            <td key={characterData.mass}>{character.mass}</td>
-            <td key={characterData.homeworld}>{character.homeworld}</td>
-            <td key={characterData.species}>{character.species}</td>
+            <td key={uuid()}>{character.birth_year}</td>
+            <td key={uuid()}>{character.height}</td>
+            <td key={uuid()}>{character.mass}</td>
+            <td key={uuid()}>{character.homeworld}</td>
+            <td key={uuid()}>{character.species}</td>
           </tr>
         ))}
       </tbody>
@@ -19,7 +19,7 @@ const TableAPI = ({ characterData }) => {
   else {
     return (
       <tbody>
-        <tr>
+        <tr key={uuid()}>
           <td colSpan="6" align="center">
             No returns, did this search yield
           </td>

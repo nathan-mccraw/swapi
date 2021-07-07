@@ -50,9 +50,9 @@ const App = () => {
   };
 
   const fetchSpecies = async (character) => {
+    if (!character.species.length) return "human";
     const species = await axios.get(character.species);
-    if (!species.data.name) return "human";
-    else return species.data.name;
+    return species.data.name;
   };
 
   const handleSubmit = (e) => {

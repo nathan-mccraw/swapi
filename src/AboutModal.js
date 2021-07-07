@@ -1,6 +1,7 @@
 import * as Icon from "bootstrap-icons-react";
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Author from "./aboutModalComponents/Author";
 
 const AboutModal = ({ isAboutModalOpen, showAboutModal, hideAboutModal }) => {
   return (
@@ -19,7 +20,7 @@ const AboutModal = ({ isAboutModalOpen, showAboutModal, hideAboutModal }) => {
       >
         <Modal.Header>About SWAPI App</Modal.Header>
         <Modal.Body>
-          <p>Author/Linked-In/Github</p>
+          {/* <Author /> */}
           <p>explain the search feature and character modals</p>
           <p>SWAPI credit w link</p>
           <p>photo credits</p>

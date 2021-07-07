@@ -9,6 +9,7 @@ const App = () => {
   const swapiURL = "https://swapi.dev/api/people/";
   const [handleQuery, setHandleQuery] = useState("");
   const [isAboutModalOpen, setisAboutModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [characterData, setCharacterData] = useState([]);
   const [nextPage, setNextPage] = useState("");
   const [previousPage, setPreviousPage] = useState("");
@@ -19,6 +20,7 @@ const App = () => {
 
   const fetchCharacterData = (queryURL) => {
     try {
+      setIsLoading(true);
       axios.get(`${queryURL}`).then(async ({ data }) => {
         const resultsArray = data.results;
 
@@ -33,6 +35,7 @@ const App = () => {
         const characters = await result;
 
         setCharacterData(characters);
+        setIsLoading(false);
         setNextPage(data.next);
         setPreviousPage(data.previous);
       });
@@ -80,7 +83,7 @@ const App = () => {
         nextPage={nextPage}
         previousPage={previousPage}
       />
-      <Table characterData={characterData} />
+      <Table characterData={characterData} isLoading={isLoading} />
     </div>
   );
 };

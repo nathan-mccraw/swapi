@@ -1,6 +1,7 @@
 import CharacterRow from "./CharacterRow.js";
+import LoadingRow from "./LoadingRow.js";
 
-const Table = ({ characterData }) => {
+const Table = ({ characterData, isLoading }) => {
   console.log(characterData);
 
   return (
@@ -22,7 +23,11 @@ const Table = ({ characterData }) => {
           <th className="col">Species</th>
         </tr>
       </thead>
-      <CharacterRow characterData={characterData} key={characterData} />
+      {isLoading ? (
+        <LoadingRow />
+      ) : (
+        <CharacterRow characterData={characterData} key={characterData} />
+      )}
     </table>
   );
 };

@@ -1,6 +1,11 @@
 import * as Icon from "bootstrap-icons-react";
 
-const Buttons = ({ handleNext, handlePrevious, nextPage, previousPage }) => {
+const PageButtons = ({
+  handleNext,
+  handlePrevious,
+  nextPage,
+  previousPage,
+}) => {
   return (
     <div className="container">
       <div className="row">
@@ -22,4 +27,4 @@ const Buttons = ({ handleNext, handlePrevious, nextPage, previousPage }) => {
     </div>
   );
 };
-export default Buttons;
+export default PageButtons;

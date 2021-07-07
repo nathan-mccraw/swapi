@@ -3,7 +3,7 @@ import axios from "axios";
 import Form from "./Form";
 import Table from "./Table";
 import Header from "./Header";
-import Buttons from "./Buttons";
+import PageButtons from "./PageButtons";
 
 const App = () => {
   const swapiURL = "https://swapi.dev/api/people/";
@@ -74,7 +74,7 @@ const App = () => {
         setHandleQuery={setHandleQuery}
         handleSubmit={handleSubmit}
       />
-      <Buttons
+      <PageButtons
         handleNext={handleNext}
         handlePrevious={handlePrevious}
         nextPage={nextPage}

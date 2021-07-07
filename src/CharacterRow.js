@@ -1,6 +1,6 @@
 import uuid from "react-uuid";
 
-const TableAPI = ({ characterData }) => {
+const CharacterRow = ({ characterData }) => {
   if (characterData.length > 0)
     return (
       <tbody>
@@ -28,4 +28,4 @@ const TableAPI = ({ characterData }) => {
     );
   }
 };
-export default TableAPI;
+export default CharacterRow;

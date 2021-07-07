@@ -1,4 +1,4 @@
-import TableAPI from "./TableAPI.js";
+import CharacterRow from "./CharacterRow.js";
 
 const Table = ({ characterData }) => {
   console.log(characterData);
@@ -22,7 +22,7 @@ const Table = ({ characterData }) => {
           <th className="col">Species</th>
         </tr>
       </thead>
-      <TableAPI characterData={characterData} key={characterData} />
+      <CharacterRow characterData={characterData} key={characterData} />
     </table>
   );
 };

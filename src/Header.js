@@ -1,6 +1,10 @@
-import AboutModal from "./AboutModal";
+import InstructionsModal from "./InstructionsModal";
 
-const Header = ({ isAboutModalOpen, showAboutModal, hideAboutModal }) => {
+const Header = ({
+  isInstructionsModalOpen,
+  showInstructionsModal,
+  hideInstructionsModal,
+}) => {
   return (
     <header className="container mb-4">
       <div className="row justify-content-center">
@@ -12,11 +16,13 @@ const Header = ({ isAboutModalOpen, showAboutModal, hideAboutModal }) => {
         </div>
       </div>
       <div className="fixed-top">
-        <AboutModal
-          isAboutModalOpen={isAboutModalOpen}
-          showAboutModal={showAboutModal}
-          hideAboutModal={hideAboutModal}
-        />
+        <div className="d-flex m-2">
+          <InstructionsModal
+            isInstructionsModalOpen={isInstructionsModalOpen}
+            showInstructionsModal={showInstructionsModal}
+            hideInstructionsModal={hideInstructionsModal}
+          />
+        </div>
       </div>
     </header>
   );

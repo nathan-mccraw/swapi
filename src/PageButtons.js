@@ -10,18 +10,25 @@ const PageButtons = ({
     <div className="container">
       <div className="row">
         <div className="d-flex justify-content-between">
-          {previousPage && (
-            <button className="btn btn-outline-light" onClick={handlePrevious}>
-              <Icon.CaretLeft />
-              Previous Page
-            </button>
-          )}
-          {nextPage && (
-            <button className="btn btn-outline-light" onClick={handleNext}>
-              Next Page
-              <Icon.CaretRight />
-            </button>
-          )}
+          <div>
+            {previousPage && (
+              <button
+                className="btn btn-outline-light"
+                onClick={handlePrevious}
+              >
+                <Icon.CaretLeft />
+                Previous Page
+              </button>
+            )}
+          </div>
+          <div>
+            {nextPage && (
+              <button className="btn btn-outline-light" onClick={handleNext}>
+                Next Page
+                <Icon.CaretRight />
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>

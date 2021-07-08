@@ -8,7 +8,7 @@ import PageButtons from "./PageButtons";
 const App = () => {
   const swapiURL = "https://swapi.dev/api/people/";
   const [handleQuery, setHandleQuery] = useState("");
-  const [isAboutModalOpen, setisAboutModalOpen] = useState(false);
+  const [isInstructionsModalOpen, setIsInstructionsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [characterData, setCharacterData] = useState([]);
   const [nextPage, setNextPage] = useState("");
@@ -62,15 +62,15 @@ const App = () => {
 
   const handleNext = () => fetchCharacterData(`${nextPage}`);
   const handlePrevious = () => fetchCharacterData(`${previousPage}`);
-  const showAboutModal = () => setisAboutModalOpen(true);
-  const hideAboutModal = () => setisAboutModalOpen(false);
+  const showInstructionsModal = () => setIsInstructionsModalOpen(true);
+  const hideInstructionsModal = () => setIsInstructionsModalOpen(false);
 
   return (
     <div className="container">
       <Header
-        isAboutModalOpen={isAboutModalOpen}
-        showAboutModal={showAboutModal}
-        hideAboutModal={hideAboutModal}
+        isInstructionsModalOpen={isInstructionsModalOpen}
+        showInstructionsModal={showInstructionsModal}
+        hideInstructionsModal={hideInstructionsModal}
       />
       <Form
         handleQuery={handleQuery}

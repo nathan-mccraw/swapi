@@ -3,7 +3,7 @@ const LoadingRow = () => {
     <tbody>
       <tr>
         <td colSpan="6" align="center">
-          <div class="lds-default">
+          <div className="lds-default">
             <div></div>
             <div></div>
             <div></div>

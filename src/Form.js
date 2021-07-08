@@ -6,6 +6,7 @@ const Form = ({ handleQuery, setHandleQuery, handleSubmit }) => {
           <input
             className="form-control"
             type="text"
+            placeholder="Search Character by Name"
             onChange={(e) => setHandleQuery(e.target.value)}
             value={handleQuery}
           />

@@ -14,7 +14,7 @@ To use the SWAPI app:
 
 2.  To use the application locally and to obtain the code base for the application, you can either download a zip file of the code and application or you can fork this repository to make changes and maintain version control.  You can download the code in a zip file by clicking "code" -> download zip from this repository dashboard (see picture below), extrtact the files from the zip file and skip to step 6.  If you wish to fork this repository then go to step 3.
 
-![download](https://user-images.githubusercontent.com/84479635/128910426-1cc2005e-5458-42f7-8d8d-9821c1114e80.JPG)
+![download](https://user-images.githubusercontent.com/84479635/128919298-327fe649-9df5-4cb3-8104-ffa7c830fecd.JPG)
 
 3. If you wish, you can fork this repository, which makes a copy of this repository and stores it to your repository (Github account required).
 

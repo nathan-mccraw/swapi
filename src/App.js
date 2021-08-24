@@ -57,7 +57,7 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchCharacterData(`https://swapi.dev/api/people/?search=${handleQuery}`);
+    fetchCharacterData(`${swapiURL}?search=${handleQuery}`);
   };
 
   const handleNext = () => fetchCharacterData(`${nextPage}`);
